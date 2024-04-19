@@ -14,7 +14,7 @@
 </th:block>
 
 <body>
-<th:block layout:fragment="header" th:include="@{/fragments/header}"></th:block>
+<th:block layout:fragment="header" th:include="@{fragments/header}"></th:block>
 
 <div layout:fragment="content" class="content" style="margin: 20px">
     <table class="table" style="width:40%">
@@ -29,7 +29,7 @@
         <th:block th:each="cl : ${channelList}">
             <tr>
                 <th scope="row" th:text="${cl.id}"></th>
-                <td><a th:href="@{|/index/${cl.id}|}" th:text="${cl.channelName}"></a></td>
+                <td><a th:href="@{|index/${cl.id}|}" th:text="${cl.channelName}"></a></td>
                 <td th:text="${cl.userCount}"></td>
             </tr>
         </th:block>
@@ -37,7 +37,7 @@
         </tbody>
     </table>
 
-    <a href="/index/create" class="btn btn-primary" style="margin-top: 32px">+</a>
+    <a href="index/create" class="btn btn-primary" style="margin-top: 32px">+</a>
 </div>
 
 <th:block layout:fragment="footer" th:include="@{/fragments/footer}"></th:block>
