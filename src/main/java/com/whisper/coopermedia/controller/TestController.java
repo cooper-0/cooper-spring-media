@@ -19,6 +19,7 @@ public class TestController {
     @Autowired
     private MediaChannelService mediaChannelService;
 
+    // GET
     @GetMapping("/")
     public String index(Model model) {
         List<MediaChannel> list = mediaChannelService.getChannelList();
@@ -29,8 +30,7 @@ public class TestController {
     }
 
     @GetMapping("/index/{id}")
-    public String show(@PathVariable Long id, Model model) {
-        log.info("id = " + id);
+    public String show(@PathVariable Long id, Model model) throws Exception {
         MediaChannel mediaChannel = mediaChannelService.show(id);
 
         model.addAttribute("mediaChannel", mediaChannel);

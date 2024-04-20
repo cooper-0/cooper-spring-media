@@ -17,7 +17,7 @@
 </th:block>
 
 <body>
-<th:block layout:fragment="header" th:include="@{/fragments/header}"></th:block>
+<th:block layout:fragment="header" th:include="@{fragments/header}"></th:block>
 
 <div layout:fragment="content" class="content" style="margin: 20px">
     <!-- 룸 아이디 번호 input -->
@@ -35,10 +35,10 @@
 
 </div>
 
-<th:block layout:fragment="footer" th:include="@{/fragments/footer}"></th:block>
+<th:block layout:fragment="footer" th:include="@{fragments/footer}"></th:block>
 
 <!-- webRTC 연결을 위한 js  -->
-<script type="text/javascript" th:src="@{/js/peerConfig.js}"></script>
+<script type="text/javascript" th:src="@{js/peerConfig.js}"></script>
 
 </body>
 

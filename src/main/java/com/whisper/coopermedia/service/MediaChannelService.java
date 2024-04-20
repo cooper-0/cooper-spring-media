@@ -6,6 +6,7 @@ import com.whisper.coopermedia.repository.MediaChannelRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,15 +16,27 @@ public class MediaChannelService {
     @Autowired
     private MediaChannelRepository mediaChannelRepository;
 
+    public MediaChannel loadChannelById(Long id) throws IllegalArgumentException{
+        return mediaChannelRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 채널"));
+    }
+
     public List<MediaChannel> getChannelList() {
         // 나중에 워크스페이스에 속한 음성채널만 가져오게
         return mediaChannelRepository.findAll();
     }
 
-    public MediaChannel show(Long id) {
-        return mediaChannelRepository.findById(id).orElse(null);
+    public MediaChannel show(Long id) throws Exception {
+        try (MediaChannel mediaChannel = loadChannelById(id)) {
+            log.info(mediaChannel.toString());
+            return mediaChannel;
+        } catch (Exception e) {
+            log.error(e.toString());
+            throw e;
+        }
     }
 
+    @Transactional
     public MediaChannel create(MediaChannelDto dto) {
         MediaChannel mediaChannel = dto.toEntity();
 
@@ -33,6 +46,4 @@ public class MediaChannelService {
 
         return mediaChannelRepository.save(mediaChannel);
     }
-
-
 }
