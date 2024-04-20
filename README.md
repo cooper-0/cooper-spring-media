@@ -7,9 +7,12 @@ WebRTC 시그널링 서버 + ~~Kurento 미디어 서버 (구현중)~~
 
 ### Prerequisites
 
-`application.properties`에 아래 내용 추가
+src/main/resources/ 위치에 `application.properties` 추가
 * application.properties
   ```
+  spring.application.name=cooper-media
+  server.port = 8081
+
   spring.datasource.url=jdbc:mysql://{your db adress}
   spring.datasource.username={your username}
   spring.datasource.password={your password}
