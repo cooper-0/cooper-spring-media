@@ -17,20 +17,22 @@ public class MainController {
     @Autowired
     private MediaChannelService mediaChannelService;
 
+    // GET
     @GetMapping("/mediachannles")
-    public List<MediaChannel> index() {
-        return mediaChannelService.getChannelList();
+    public ResponseEntity<List<MediaChannel>> index() {
+        List<MediaChannel> list = mediaChannelService.getChannelList();
+
+        return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
     @GetMapping("/mediachannles/{id}")
-    public ResponseEntity<MediaChannel> show(@PathVariable Long id) {
+    public ResponseEntity<MediaChannel> show(@PathVariable Long id) throws Exception {
         MediaChannel mediaChannel = mediaChannelService.show(id);
 
-        return mediaChannel != null ?
-                ResponseEntity.status(HttpStatus.OK).body(mediaChannel) :
-                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return ResponseEntity.status(HttpStatus.OK).body(mediaChannel);
     }
 
+    // POST
     @PostMapping("/mediachannles")
     public ResponseEntity<MediaChannel> create(@RequestBody MediaChannelDto dto) {
         log.info(dto.toString());
