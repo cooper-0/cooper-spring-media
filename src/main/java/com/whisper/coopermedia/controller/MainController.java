@@ -19,11 +19,6 @@ public class MainController {
     private MediaChannelService mediaChannelService;
 
     // GET
-    @GetMapping("/test")
-    public String test() {
-        return "test cooper-media";
-    }
-
     @GetMapping("/mediachannles")
     public ResponseEntity<List<MediaChannel>> index() {
         List<MediaChannel> list = mediaChannelService.getChannelList();
