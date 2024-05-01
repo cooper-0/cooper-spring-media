@@ -36,7 +36,7 @@ public class MediaChannelService {
         }
     }
 
-    @Transactional
+//    @Transactional
     public MediaChannel create(MediaChannelDto dto) {
         MediaChannel mediaChannel = dto.toEntity();
 
@@ -45,5 +45,29 @@ public class MediaChannelService {
         }
 
         return mediaChannelRepository.save(mediaChannel);
+    }
+
+    public MediaChannel update(Long id, MediaChannelDto dto) throws Exception {
+        try (MediaChannel mediaChannel = loadChannelById(id)) {
+            log.info(mediaChannel.toString());
+            mediaChannelRepository.save(mediaChannel);
+
+            return mediaChannel;
+        } catch (Exception e) {
+            log.error(e.toString());
+            throw e;
+        }
+    }
+
+    public MediaChannel delete(Long id) throws Exception {
+        try (MediaChannel mediaChannel = loadChannelById(id)) {
+            log.info(mediaChannel.toString());
+            mediaChannelRepository.delete(mediaChannel);
+
+            return mediaChannel;
+        } catch (Exception e) {
+            log.error(e.toString());
+            throw e;
+        }
     }
 }

@@ -13,6 +13,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@RequestMapping("/cooper-media")
 public class MainController {
     @Autowired
     private MediaChannelService mediaChannelService;
@@ -41,5 +42,22 @@ public class MainController {
         return created != null ?
                 ResponseEntity.status(HttpStatus.CREATED).body(created) :
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    // PATCH
+    @PatchMapping("/mediachannles/{id}")
+    public ResponseEntity<MediaChannel> update(@PathVariable Long id, @RequestBody MediaChannelDto dto) throws Exception {
+        log.info(dto.toString());
+        MediaChannel updated = mediaChannelService.update(id, dto);
+
+        return ResponseEntity.status(HttpStatus.OK).body(updated);
+    }
+
+    // DELETE
+    @DeleteMapping("/mediachannles/{id}")
+    public ResponseEntity<MediaChannel> delete(@PathVariable Long id) throws Exception {
+        MediaChannel delete = mediaChannelService.delete(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
