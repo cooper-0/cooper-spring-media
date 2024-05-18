@@ -13,6 +13,7 @@ public class MediaChannel extends BaseEntity implements AutoCloseable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY) // db가 id를 자동 생성하게
     private Long id;
+    private Long workspaceId;
     private String channelName;
     private int userCount;
 
@@ -20,5 +21,4 @@ public class MediaChannel extends BaseEntity implements AutoCloseable {
     public void close() throws Exception {
 
     }
-    // private Long parentId; // 워크스페이스 키
 }

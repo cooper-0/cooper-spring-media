@@ -19,22 +19,23 @@ public class MainController {
     private MediaChannelService mediaChannelService;
 
     // GET
-    @GetMapping("/mediachannles")
+    @GetMapping("/mediachannels")
     public ResponseEntity<List<MediaChannel>> index() {
         List<MediaChannel> list = mediaChannelService.getChannelList();
 
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
-    @GetMapping("/mediachannles/{id}")
-    public ResponseEntity<MediaChannel> show(@PathVariable Long id) throws Exception {
-        MediaChannel mediaChannel = mediaChannelService.show(id);
+    // GET
+    @GetMapping("/mediachannels/{workspaceId}")
+    public ResponseEntity<List<MediaChannel>> show(@PathVariable Long workspaceId) throws Exception {
+        List<MediaChannel> list = mediaChannelService.getChannelList(workspaceId);
 
-        return ResponseEntity.status(HttpStatus.OK).body(mediaChannel);
+        return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
     // POST
-    @PostMapping("/mediachannles")
+    @PostMapping("/mediachannels")
     public ResponseEntity<MediaChannel> create(@RequestBody MediaChannelDto dto) {
         log.info(dto.toString());
         MediaChannel created = mediaChannelService.create(dto);
@@ -45,7 +46,7 @@ public class MainController {
     }
 
     // PATCH
-    @PatchMapping("/mediachannles/{id}")
+    @PatchMapping("/mediachannels/{id}")
     public ResponseEntity<MediaChannel> update(@PathVariable Long id, @RequestBody MediaChannelDto dto) throws Exception {
         log.info(dto.toString());
         MediaChannel updated = mediaChannelService.update(id, dto);
@@ -54,7 +55,7 @@ public class MainController {
     }
 
     // DELETE
-    @DeleteMapping("/mediachannles/{id}")
+    @DeleteMapping("/mediachannels/{id}")
     public ResponseEntity<MediaChannel> delete(@PathVariable Long id) throws Exception {
         MediaChannel delete = mediaChannelService.delete(id);
 

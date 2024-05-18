@@ -21,9 +21,14 @@ public class MediaChannelService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 채널"));
     }
 
+    // 모든 채널 리스트
     public List<MediaChannel> getChannelList() {
-        // 나중에 워크스페이스에 속한 음성채널만 가져오게
         return mediaChannelRepository.findAll();
+    }
+
+    // 워크스페이스에 속한 음성채널 리스트
+    public List<MediaChannel> getChannelList(long workspaceId) {
+        return mediaChannelRepository.findByWorkspaceId(workspaceId).orElse(null);
     }
 
     public MediaChannel show(Long id) throws Exception {

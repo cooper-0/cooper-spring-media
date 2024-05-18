@@ -13,10 +13,11 @@ import lombok.*;
 @ToString
 public class MediaChannelDto {
     private Long id;
+    private Long workspaceId;
     private String channelName;
     private int userCount;
 
     public MediaChannel toEntity() {
-        return new MediaChannel(id, channelName, userCount);
+        return new MediaChannel(id, workspaceId, channelName, userCount);
     }
 }
