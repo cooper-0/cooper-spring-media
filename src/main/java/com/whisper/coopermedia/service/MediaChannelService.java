@@ -21,13 +21,19 @@ public class MediaChannelService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 채널"));
     }
 
+    // 모든 채널 리스트
     public List<MediaChannel> getChannelList() {
-        // 나중에 워크스페이스에 속한 음성채널만 가져오게
         return mediaChannelRepository.findAll();
     }
 
+    // 워크스페이스에 속한 음성채널 리스트
+    public List<MediaChannel> getChannelList(long workspaceId) {
+        return mediaChannelRepository.findByWorkspaceId(workspaceId).orElse(null);
+    }
+
     public MediaChannel show(Long id) throws Exception {
-        try (MediaChannel mediaChannel = loadChannelById(id)) {
+        try {
+            MediaChannel mediaChannel = loadChannelById(id);
             log.info(mediaChannel.toString());
             return mediaChannel;
         } catch (Exception e) {
@@ -48,7 +54,8 @@ public class MediaChannelService {
     }
 
     public MediaChannel update(Long id, MediaChannelDto dto) throws Exception {
-        try (MediaChannel mediaChannel = loadChannelById(id)) {
+        try {
+            MediaChannel mediaChannel = loadChannelById(id);
             log.info(mediaChannel.toString());
             mediaChannelRepository.save(mediaChannel);
 
@@ -60,7 +67,8 @@ public class MediaChannelService {
     }
 
     public MediaChannel delete(Long id) throws Exception {
-        try (MediaChannel mediaChannel = loadChannelById(id)) {
+        try {
+            MediaChannel mediaChannel = loadChannelById(id);
             log.info(mediaChannel.toString());
             mediaChannelRepository.delete(mediaChannel);
 
