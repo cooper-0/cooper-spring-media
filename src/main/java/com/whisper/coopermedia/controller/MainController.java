@@ -18,7 +18,7 @@ public class MainController {
     @Autowired
     private MediaChannelService mediaChannelService;
 
-    // GET
+    // GET 모든 mediachannel 리스트
     @GetMapping("/mediachannels")
     public ResponseEntity<List<MediaChannel>> index() {
         List<MediaChannel> list = mediaChannelService.getChannelList();
@@ -26,9 +26,9 @@ public class MainController {
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
-    // GET
+    // GET workspace에 속한 mediachannel 리스트
     @GetMapping("/mediachannels/{workspaceId}")
-    public ResponseEntity<List<MediaChannel>> show(@PathVariable Long workspaceId) throws Exception {
+    public ResponseEntity<List<MediaChannel>> show(@PathVariable Long workspaceId) {
         List<MediaChannel> list = mediaChannelService.getChannelList(workspaceId);
 
         return ResponseEntity.status(HttpStatus.OK).body(list);

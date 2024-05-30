@@ -1,5 +1,7 @@
 package com.whisper.coopermedia.controller;
 
+import com.whisper.coopermedia.dto.SignalMessage;
+import com.whisper.coopermedia.dto.SimpleUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -13,37 +15,37 @@ public class SignalingController {
     /**
      * offer 정보를 주고 받기 위한 websocket
      * @param roomId 룸 아이디
-     * @param camKey 각 요청하는 캠의 key
+     * @param key 각 요청하는 캠의 key
      */
-    @MessageMapping("/peer/offer/{camKey}/{roomId}")
-    @SendTo("/topic/peer/offer/{camKey}/{roomId}")
+    @MessageMapping("/peer/offer/{key}/{roomId}")
+    @SendTo("/topic/peer/offer/{key}/{roomId}")
     public String PeerHandleOffer(@Payload String offer, @DestinationVariable(value = "roomId") String roomId,
-                                  @DestinationVariable(value = "camKey") String camKey) {
-        log.info("[OFFER] {} : {}", camKey, offer);
+                                  @DestinationVariable(value = "key") String key) {
+        log.info("[OFFER] {} : {}", key, offer);
         return offer;
     }
 
     /**
      * iceCandidate 정보를 주고 받기 위한 webSocket
      * @param roomId 룸 아이디
-     * @param camKey 각 요청하는 캠의 key
+     * @param key 각 요청하는 캠의 key
      */
-    @MessageMapping("/peer/iceCandidate/{camKey}/{roomId}")
-    @SendTo("/topic/peer/iceCandidate/{camKey}/{roomId}")
+    @MessageMapping("/peer/iceCandidate/{key}/{roomId}")
+    @SendTo("/topic/peer/iceCandidate/{key}/{roomId}")
     public String PeerHandleIceCandidate(@Payload String candidate, @DestinationVariable(value = "roomId") String roomId,
-                                         @DestinationVariable(value = "camKey") String camKey) {
-        log.info("[ICECANDIDATE] {} : {}", camKey, candidate);
+                                         @DestinationVariable(value = "key") String key) {
+        log.info("[ICECANDIDATE] {} : {}", key, candidate);
         return candidate;
     }
 
     /**
      *
      */
-    @MessageMapping("/peer/answer/{camKey}/{roomId}")
-    @SendTo("/topic/peer/answer/{camKey}/{roomId}")
+    @MessageMapping("/peer/answer/{key}/{roomId}")
+    @SendTo("/topic/peer/answer/{key}/{roomId}")
     public String PeerHandleAnswer(@Payload String answer, @DestinationVariable(value = "roomId") String roomId,
-                                   @DestinationVariable(value = "camKey") String camKey) {
-        log.info("[ANSWER] {} : {}", camKey, answer);
+                                   @DestinationVariable(value = "key") String key) {
+        log.info("[ANSWER] {} : {}", key, answer);
         return answer;
     }
 

@@ -18,6 +18,11 @@ public class MediaChannelDto {
     private int userCount;
 
     public MediaChannel toEntity() {
-        return new MediaChannel(id, workspaceId, channelName, userCount);
+        return MediaChannel.builder()
+                .id(id)
+                .workspaceId(workspaceId)
+                .channelName(channelName)
+                .userCount(userCount)
+                .build();
     }
 }

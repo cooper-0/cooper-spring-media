@@ -32,7 +32,8 @@ public class MediaChannelService {
     }
 
     public MediaChannel show(Long id) throws Exception {
-        try (MediaChannel mediaChannel = loadChannelById(id)) {
+        try {
+            MediaChannel mediaChannel = loadChannelById(id);
             log.info(mediaChannel.toString());
             return mediaChannel;
         } catch (Exception e) {
@@ -53,7 +54,8 @@ public class MediaChannelService {
     }
 
     public MediaChannel update(Long id, MediaChannelDto dto) throws Exception {
-        try (MediaChannel mediaChannel = loadChannelById(id)) {
+        try {
+            MediaChannel mediaChannel = loadChannelById(id);
             log.info(mediaChannel.toString());
             mediaChannelRepository.save(mediaChannel);
 
@@ -65,7 +67,8 @@ public class MediaChannelService {
     }
 
     public MediaChannel delete(Long id) throws Exception {
-        try (MediaChannel mediaChannel = loadChannelById(id)) {
+        try {
+            MediaChannel mediaChannel = loadChannelById(id);
             log.info(mediaChannel.toString());
             mediaChannelRepository.delete(mediaChannel);
 
