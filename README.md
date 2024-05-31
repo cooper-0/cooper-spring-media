@@ -7,6 +7,29 @@ WebRTC 시그널링 서버 + ~~Kurento 미디어 서버 (구현중)~~
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## 프로젝트 구조
+<div align="center">
+  <br>
+  <img src="info/WebRTC Signaling.png" width="480">
+</div>
+
+<br>
+<br>
+
+  WebSocket & Stomp 사용
+  - Client A: SDP 형태의 Offer 메시지를 생성
+  - Client A: 생성된 Offer 메시지를 시그널링 서버에게 전달
+  - Signaling Server: 상대 Client를 찾아서 Offer 메시지 전달
+  - Client B: SDP 형태의 Answer 메시지 생성
+  - Client B: 생성된 Answer 메시지를 시그널링 서버에게 전달
+  - Signaling Server: 상대 Client를 찾아서 Answer 메시지 전달 
+
+<br>
+<br>
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Prerequisites
 
 src/main/resources/ 위치에 `application.properties` or `application.yml` 추가
@@ -79,25 +102,4 @@ src/main/resources/ 위치에 `application.properties` or `application.yml` 추�
 * [Spring Data JPA](https://docs.spring.io/spring-boot/docs/3.2.4/reference/htmlsingle/index.html#data.sql.jpa-and-spring-data)
 * [Spring Configuration Processor](https://docs.spring.io/spring-boot/docs/3.2.4/reference/htmlsingle/index.html#appendix.configuration-metadata.annotation-processor)
 * [WebSocket](https://docs.spring.io/spring-boot/docs/3.2.4/reference/htmlsingle/index.html#messaging.websockets)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## 프로젝트 구조
-<div align="center">
-  <br>
-  <img src="info/WebRTC Signaling.png" width="480">
-</div>
-
-<br>
-<br>
-
-  WebSocket & Stomp 사용
-  - Client A: SDP 형태의 Offer 메시지를 생성
-  - Client A: 생성된 Offer 메시지를 시그널링 서버에게 전달
-  - Signaling Server: 상대 Client를 찾아서 Offer 메시지 전달
-  - Client B: SDP 형태의 Answer 메시지 생성
-  - Client B: 생성된 Answer 메시지를 시그널링 서버에게 전달
-  - Signaling Server: 상대 Client를 찾아서 Answer 메시지 전달 
-
-  
 
