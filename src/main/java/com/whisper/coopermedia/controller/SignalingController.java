@@ -52,9 +52,9 @@ public class SignalingController {
     /**
      * camKey 를 받기위해 신호를 보내는 webSocket
      */
-    @MessageMapping("/call/key")
-    @SendTo("/topic/call/key")
-    public String callKey(@Payload String message) {
+    @MessageMapping("/call/key/{roomId}")
+    @SendTo("/topic/call/key/{roomId}")
+    public String callKey(@Payload String message, @DestinationVariable(value = "roomId") String roomId) {
         log.info("[Key] : {}", message);
         return message;
     }
@@ -62,9 +62,18 @@ public class SignalingController {
     /**
      * 자신의 camKey 를 모든 연결된 세션에 보내는 webSocket
      */
-    @MessageMapping("/send/key")
-    @SendTo("/topic/send/key")
-    public String sendKey(@Payload String message) {
+    @MessageMapping("/send/key/{roomId}")
+    @SendTo("/topic/send/key/{roomId}")
+    public String sendKey(@Payload String message, @DestinationVariable(value = "roomId") String roomId) {
+        return message;
+    }
+
+    /**
+     * 연결 종료
+     */
+    @MessageMapping("/delete/key/{roomId}")
+    @SendTo("/topic/delete/key/{roomId}")
+    public String deleteKey(@Payload String message, @DestinationVariable(value = "roomId") String roomId) {
         return message;
     }
 }
